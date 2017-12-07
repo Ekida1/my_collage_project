@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      a.btn.btn-primary.backadmin(href="/preadmin") << 返回后台首页
+      table.table.table-hover.table-bordered
+        thead
+          tr
+            th 名字
+            th 时间
+            th 身份
+            th 删除
+
+        tbody
+          each item in users
+            tr(class="item-id-#{item._id}")
+              td.username #{item.name}
+              td #{moment(item.meta.createdAt).format('MM/DD/YYYY')}
+              td.role #{item.role}
+              td
+                button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除
+  script(src="/js/delete_user.js")
+  script.
+    var userId =$('.navbar-text span').first().attr('id');
+    var myTr = $('.item-id-' + userId);
+    myTr.children('td.username').html(myTr.children('td.username').html() + "（您当前的用户）");
+    //- myTr.children('td.username').innerHTML += "(您当前的用户)";  //无效，在tbody 或tr下的 innerHTML是只读，不可赋值改写的
+
+
+  style.
+    .backadmin{
+      margin-bottom:10px
+    }

@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      if !user
+        a.btn.btn-success.btnsign(href='/signup') 进入注册页面
+        a.btn.btn-success.btnsign(href='/signin') 进入登录页面
+      each cat in categories
+        .panel.panel-default
+          .panel-heading
+            h3  #{cat.name} 
+          .panel-body
+            if cat.movies && cat.movies.length >0
+              each item in cat.movies
+                .col-md-2
+                  .thumbnail
+                    a(href="/movie/#{item._id}/#{cat._id}")
+                      if item.poster.indexOf('https:') > -1
+                       img(src="#{item.poster}", alt="#{item.title}") 
+                      else
+                        img(src="/upload/#{item.poster}", alt="#{item.title}")
+                    .caption
+                      h3 #{item.title}
+                      p: a.btn.btn-primary(href='/movie/#{item._id}/#{cat._id}')  观看预告片
+           .panel-bottom   
+              h4
+                a.btn.btn-info(href='/results?cat=#{cat._id}&p=0' ,style="margin-left:35px") 查看更多
+  style.
+    .btnsign{
+      margin:5px
+    }

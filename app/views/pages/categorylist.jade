@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      a.btn.btn-primary.backadmin(href="/preadmin") << 返回后台首页
+      a.btn.btn-primary.backadmin(href="/admin/category/new") 添加电影分类 >>
+      table.table.table-hover.table-bordered
+        thead
+          tr
+            th 名字
+            th 时间
+            th 删除
+
+        tbody
+          each item in categories
+            tr(class="item-id-#{item._id}")
+              td #{item.name}
+              td #{moment(item.meta.createdAt).format('MM/DD/YYYY')}
+              td
+                button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除
+  style.
+    .backadmin{
+      margin:10px
+    }

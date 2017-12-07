@@ -1,0 +1,28 @@
+doctype
+html
+  head 
+    meta(charset="utf-8")
+    title #{title}
+    include ../includes/head
+  body
+  .container
+    .row
+      .page-header
+        h1= title
+        small 来自hellobunny官方网站
+  .container
+    .row
+      .col-md-5
+        div
+          .modal-header 登录
+          .modal-body
+            .form-group
+              label(for="signinName")  用户名
+              input.signinName.form-control(name="user[name]",type="text")
+            .form-group
+              label(for="signinPassword")  密码
+              input.signinPassword.form-control(name="user[password]",type="password")
+          .modal-footer
+            button.btn.btn-default(type="button",data-dismiss="modal")  关闭
+            button.btn.btn-primary(type="button" ,class="submit_signin")  确认登录
+  script(src="/js/signin_modal.js")

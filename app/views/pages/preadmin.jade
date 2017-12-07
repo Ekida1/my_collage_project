@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .container
+    h3 欢迎管理员登录，请选择进入界面，靴靴。
+    .col-md-2
+      a.btn.btn-success(href="http://localhost:3000/") 进入网站首页
+    .col-md-2
+      a.btn.btn-primary(href="/admin/movie/list") 电影列表页面
+    .col-md-2
+      a.btn.btn-primary(href="/admin/user/list") 用户列表页面
+    .col-md-2
+      a.btn.btn-primary(href="/admin/category/list") 电影分类页面
+    .col-md-2
+      a.btn.btn-primary(href="/admin/movie") 添加电影信息页面

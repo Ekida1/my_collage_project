@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .panel.panel-default
+        .panel-heading
+          h3 
+        .panel-body
+          if movies && movies.length >0
+            each item in movies
+              .col-md-2
+                .thumbnail
+                  a(href="/movie/#{item._id}/#{item.category}")
+                    img(src="#{item.poster}", alt="#{item.title}")
+                  .caption
+                    h4 #{item.title}
+                    p: a.btn.btn-primary(href="/movie/#{item._id}/#{item.category}")  观看预告片
+    ul.pagination
+        - for (var i = 0; i < totalPage; i++){  //按钮是通过for循环一个个的渲染出来的，先渲第一个，如果if为true路径，走将按钮变为激活蓝色状态的路径，如果为false走把相应的按钮渲染出来的路径
+        -   if (currentPage == (i + 1)){
+              li.active
+                span #{currentPage}
+        - }     //如果一进来时的页面数为第i+1页，那么li按钮上的active为被激活的
+        -    else{
+               li
+                 a(href='/results?#{query}&p=#{i}') #{ i + 1 }  
+        - }   //此处href里有在往后台传参。其中query是后台render传进来的，i是for循环时创建的
+        - }   //后面的 #{ i + 1}代表渲染出的分页li按钮上的数字

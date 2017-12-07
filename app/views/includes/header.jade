@@ -1,0 +1,88 @@
+.container
+  .row
+    .page-header.clearfix
+      a(href="/")
+        img(src="http://wx3.sinaimg.cn/mw690/66c224b2gy1ff9gnor3z2j202s02swep.jpg")
+      if user && user.role>10
+        a(href="/preadmin")
+          img(src="http://wx1.sinaimg.cn/mw690/66c224b2gy1ffhixv4wmgj202s02s3yj.jpg" style="float:right")  
+      h1= title
+      .col-md-4
+        small 来自Ekida的官方网站
+      //- .col-md-1
+      //-   a.btn.btn-primary(data-toggle="modal"  data-target="#adminModal") 进入后台
+      .col-md-8
+        form(method='GET', action='/results')
+          .input-group.col-sm-4.pull-right
+            input.form-control(type='text',name='q')
+            span.input-group-btn
+              button.btn.btn-default(type='submit') 搜索  
+                span.glyphicon.glyphicon-search(aria-hidden="true" aria-label="Left Align")
+.navbar.navbar-default.navbar-fixed-bottom(role="navigation")
+  .container
+    .navbar-header
+      a.navbar-brand(href="/") Hello Bunny电影小屋
+    if user
+      p.navbar-text.navbar-right
+        span(id ="#{user._id}") 欢迎您,#{user.name}
+        span &nbsp; | &nbsp;
+        a.navbar-link(href="/logout")  登出
+    else 
+      p.navbar-text.navbar-right
+        a.navbar-link(href="#",data-toggle="modal",data-target="#signupModal")  注册
+        span &nbsp; | &nbsp;
+        a.navbar-link(href="#",data-toggle="modal",data-target="#signinModal")  登录
+      
+script(src="/js/signup_modal.js")
+script(src="/js/signin_modal.js")
+      
+#signupModal.modal.fade
+  .modal-dialog
+    .modal-content
+      div
+        .modal-header 注册
+        .modal-body
+          .form-group
+            label(for="signupName")  用户名
+            input.signupName.form-control(name="user[name]",type="text")
+          .form-group
+            label(for="signupPassword")  密码
+            input.signupPassword.form-control(name="user[password]",type="password")
+        .modal-footer
+          button.btn.btn-default(type="button",data-dismiss="modal")  关闭
+          button.btn.btn-success(type="button" class="submit_register")  提交
+
+
+
+
+#signinModal.modal.fade
+  .modal-dialog
+    .modal-content
+      div
+        .modal-header 登录
+        .modal-body
+          .form-group
+            label(for="signinName")  用户名
+            input.signinName.form-control(name="user[name]",type="text")
+          .form-group
+            label(for="signinPassword")  密码
+            input.signinPassword.form-control(name="user[password]",type="password")
+        .modal-footer
+          button.btn.btn-default(type="button",data-dismiss="modal")  关闭
+          button.btn.btn-success(type="button" ,class="submit_signin")  确认登录
+
+//- #adminModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel")
+//-   .modal-dialog.modal-sm(role="document")
+//-     .modal-content
+//-       div
+//-         .modal-header 选择后台页面
+//-         .modal-body
+//-           .col-md-4
+//-           .form-group
+//-             a.btn.btn-primary.btnlist(href="/admin/movie/list") 电影列表页面
+//-           .col-md-4
+//-           .form-group
+//-             a.btn.btn-primary.btnlist(href="/admin/user/list") 用户列表页面
+//-           .col-md-4
+//-           .form-group
+//-             a.btn.btn-primary.btnlist(href="/admin/category/list") 电影分类页面
